@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="random.html">Random</a>
+</div>
+<section class="vscode-light">
+<h1>Where are clipboard files located in Ubuntu?</h1>
+<ul>
+<li>The clipboard is not stored in the filesystem or even in a particular location in memory.</li>
+<li>When you copy text in an application (whether by selecting text, for the primary selection, or by an explicit 'copy' operation for clipboard selection), the application where you copy alerts the X server that it now owns that particular selection.</li>
+<li>When you paste, the application you paste into sends a request to the X server, which is redirected to the application that owns the selection. </li>
+</ul>
+</section></body>
+</html>

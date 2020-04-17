@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="tf.html">Tf</a>
+<a href="ros_navigation_stack.html">ROS Navigation Stack</a>
+<a href="image_pipeline.html">Image Pipeline</a>
+<a href="viso2_ros.html">VISO2 ROS</a>
+</div>
+<section class="vscode-light">
+<h1>Installation</h1>
+<ul>
+<li>http://wiki.ros.org/navigation</li>
+<li>sudo apt-get install ros-melodic-navigation</li>
+</ul>
+<h1>Packages list</h1>
+<ul>
+<li>amcl</li>
+<li>base_local_planner</li>
+<li>carrot_planner</li>
+<li>clear_costmap_recovery</li>
+<li>costmap_2d</li>
+<li>dwa_local_planner</li>
+<li>fake_localization</li>
+<li>global_planner</li>
+<li>map_server</li>
+<li>move_base</li>
+<li>move_base_msgs</li>
+<li>move_slow_and_clear</li>
+<li>nav_core</li>
+<li>navfn</li>
+<li>rotate_recovery</li>
+<li>Voxel_grid</li>
+</ul>
+<h1>Basic Overview</h1>
+<ul>
+<li>Navigation Stack takes in information from odometry and sensor streams and outputs velocity commands to send to a mobile base.</li>
+<li>Robot should have a tf transform tree in place, and publish sensor data using the correct ROS Message types.</li>
+<li>It is meant for both differential drive and holonomic wheeled robots only.</li>
+<li>It requires a planar laser mounted somewhere on the mobile base.</li>
+<li>3 important part we need to know about are:<ul>
+<li>Setting up your robot using tf</li>
+<li>Publishing Sensor Streams</li>
+<li>Publishing Odometry Information</li>
+</ul>
+</li>
+</ul>
+<h1>Setting up robot using tf</h1>
+<ul>
+<li>A proper tf tree needs to be set up while designing the robot.</li>
+<li>At an abstract level, a tf tree defines offsets in terms of both translation and rotation between different coordinate frames.</li>
+<li>Conventions used for naming frames:</li>
+<li>https://www.ros.org/reps/rep-0105.html</li>
+<li>Consider a robot with base (base_link) and laser scanner (base_scanner)</li>
+<li>Base_link is parent and laser is child here.</li>
+<li>tf assumes that all transforms move from parent to child.</li>
+<li>Tf tree gives translation and rotation from parent to child</li>
+<li>With this transform tree set up, converting the laser scan received in the "base_laser" frame to the "base_link" frame is as simple as making a call to the tf library.</li>
+<li>So, it helps to convert laser scan obtained at base_laser frame to map frame</li>
+</ul>
+<h1>‘amcl’ package</h1>
+<p><code>├── cfg
+│   └── AMCL.cfg
+├── CHANGELOG.rst
+├── CMakeLists.txt
+├── examples
+│   ├── amcl_diff.launch
+│   └── amcl_omni.launch
+├── include
+│   └── amcl
+│       ├── map
+│       │   └── map.h
+│       ├── pf
+│       │   ├── eig3.h
+│       │   ├── pf.h
+│       │   ├── pf_kdtree.h
+│       │   ├── pf_pdf.h
+│       │   └── pf_vector.h
+│       └── sensors
+│           ├── amcl_laser.h
+│           ├── amcl_odom.h
+│           └── amcl_sensor.h
+├── package.xml
+├── src
+│   ├── amcl
+│   │   ├── map
+│   │   │   ├── map.c
+│   │   │   ├── map_cspace.cpp
+│   │   │   ├── map_draw.c
+│   │   │   ├── map_range.c
+│   │   │   └── map_store.c
+│   │   ├── pf
+│   │   │   ├── eig3.c
+│   │   │   ├── pf.c
+│   │   │   ├── pf_draw.c
+│   │   │   ├── pf_kdtree.c
+│   │   │   ├── pf_pdf.c
+│   │   │   └── pf_vector.c
+│   │   └── sensors
+│   │       ├── amcl_laser.cpp
+│   │       ├── amcl_odom.cpp
+│   │       └── amcl_sensor.cpp
+│   ├── amcl_node.cpp
+│   └── include
+│       └── portable_utils.hpp
+└── test
+    ├── basic_localization.py
+    ├── basic_localization_stage.xml
+    ├── global_localization_stage.xml
+    ├── rosie_multilaser.xml
+    ├── set_initial_pose_delayed.xml
+    ├── set_initial_pose.xml
+    ├── set_pose.py
+    ├── small_loop_crazy_driving_prg_corrected.xml
+    ├── small_loop_crazy_driving_prg.xml
+    ├── small_loop_prf.xml
+    ├── texas_greenroom_loop_corrected.xml
+    ├── texas_greenroom_loop.xml
+    ├── texas_willow_hallway_loop_corrected.xml
+    └── texas_willow_hallway_loop.xml</code></p>
+</section></body>
+</html>

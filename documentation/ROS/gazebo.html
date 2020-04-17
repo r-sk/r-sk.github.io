@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="tf.html">Tf</a>
+<a href="ros_navigation_stack.html">ROS Navigation Stack</a>
+<a href="image_pipeline.html">Image Pipeline</a>
+<a href="viso2_ros.html">VISO2 ROS</a>
+</div>
+<section class="vscode-light">
+<h1>Some Errors</h1>
+<h2>[Err] [REST.cc:205] Error in REST request</h2>
+<p>Solution:
+Change the URL to ignitionrobotics in ~/.ignition/fuel/config.yaml</p>
+<h2>Gazebo Models not found</h2>
+<ul>
+<li>Models needed to be loaded from an online database.</li>
+<li>But if you want to keep it locally, download the database from: https://bitbucket.org/osrf/gazebo_models/src/default/</li>
+<li>Then place all models inside: ~/.gazebo/models/</li>
+</ul>
+<h1>spawn_model</h1>
+<p>```
+usage: spawn_model [-h] (-urdf | -sdf)
+                   (-file FILE_NAME | -param PARAM_NAME | -database MODEL_NAME | -stdin)
+                   -model MODEL_NAME [-reference_frame REFERENCE_FRAME]
+                   [-gazebo_namespace GAZEBO_NAMESPACE]
+                   [-robot_namespace ROBOT_NAMESPACE] [-unpause]
+                   [-wait MODEL_NAME] [-x X] [-y Y] [-z Z] [-R R] [-P P]
+                   [-Y Y] [-J JOINT_NAME JOINT_POSITION] [-package_to_model]
+                   [-b]</p>
+<p>Spawn a model in gazebo using the ROS API</p>
+<p>optional arguments:
+  -h, --help            show this help message and exit
+  -urdf                 Incoming xml is in urdf format
+  -sdf                  Incoming xml is in sdf format
+  -file FILE_NAME       Load model xml from file
+  -param PARAM_NAME     Load model xml from ROS parameter
+  -database MODEL_NAME  Load model XML from specified model in Gazebo Model
+                        Database
+  -stdin                Load model from stdin
+  -model MODEL_NAME     Name of model to spawn
+  -reference_frame REFERENCE_FRAME
+                        Name of the model/body where initial pose is defined.
+                        If left empty or specified as "world", gazebo world
+                        frame is used
+  -gazebo_namespace GAZEBO_NAMESPACE
+                        ROS namespace of gazebo offered ROS interfaces.
+                        Defaults to /gazebo/
+  -robot_namespace ROBOT_NAMESPACE
+                        change ROS namespace of gazebo-plugins
+  -unpause              !!!Experimental!!! unpause physics after spawning
+                        model
+  -wait MODEL_NAME      !!!Experimental!!! wait for model to exist
+  -x X                  x component of initial position, meters
+  -y Y                  y component of initial position, meters
+  -z Z                  z component of initial position, meters
+  -R R                  roll angle of initial orientation, radians
+  -P P                  pitch angle of initial orientation, radians
+  -Y Y                  yaw angle of initial orientation, radians
+  -J JOINT_NAME JOINT_POSITION
+                        initialize the specified joint at the specified
+                        position
+  -package_to_model     convert urdf &lt;mesh filename="package://..." to &lt;mesh
+                        filename="model://..."
+  -b                    bond to gazebo and delete the model when this program
+                        is interrupted
+```</p>
+<h2>Delete a model: (using ros service)</h2>
+<p>rosservice call gazebo/delete_model '{model_name: stereo_bot_2}'</p>
+</section></body>
+</html>

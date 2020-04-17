@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="tf.html">Tf</a>
+<a href="ros_navigation_stack.html">ROS Navigation Stack</a>
+<a href="image_pipeline.html">Image Pipeline</a>
+<a href="viso2_ros.html">VISO2 ROS</a>
+</div>
+<section class="vscode-light">
+<h1>'viso2_ros' package</h1>
+<ul>
+<li>http://wiki.ros.org/viso2_ros</li>
+<li>Function: Estimate camera motion based on incoming rectified images from calibrated cameras</li>
+<li>Has 3 nodes:<ul>
+<li>mono_odometer</li>
+<li>mono_odometer_omnidirectional</li>
+<li>stereo_odometer </li>
+</ul>
+</li>
+<li>To estimate the scale of the motion, the mono odometer uses the ground plane and therefore needs information about the camera's z-coordinate and its pitch.</li>
+<li>Stereo odometer just needs stereo images.</li>
+<li>Tf tree structure needed:<br/>
+        world → odom → base_link → camera</li>
+<li>This package publishes:<br/>
+        odom → base_link</li>
+<li>For this to work, it needs to know:<br/>
+        base_link → camera</li>
+<li>If not published, it assumes it as the identity matrix which means the robot frame and the camera frame are identical</li>
+</ul>
+<blockquote>
+<p>The coordinate frame of the camera is expected to be the optical frame (like in monitor).<br/>
+i.e x is pointing right, y downwards and z from the camera into the scene.</p>
+</blockquote>
+<h1>Extras</h1>
+<ul>
+<li>Uses <strong>dense</strong> stereo point clouds coming from stereo_image_proc</li>
+</ul>
+</section></body>
+</html>

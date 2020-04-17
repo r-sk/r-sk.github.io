@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="tf.html">Tf</a>
+<a href="ros_navigation_stack.html">ROS Navigation Stack</a>
+<a href="image_pipeline.html">Image Pipeline</a>
+<a href="viso2_ros.html">VISO2 ROS</a>
+</div>
+<section class="vscode-light">
+<h1>image_pipeline</h1>
+<ul>
+<li>http://wiki.ros.org/image_pipeline</li>
+<li>It fills the gap between getting raw images from a camera driver and higher-level vision processing.</li>
+<li>It has collection of packages which includes:<ul>
+<li>camera_calibration</li>
+<li>depth_image_proc</li>
+<li>image_proc</li>
+<li>image_publisher</li>
+<li>image_rotate</li>
+<li>image_view</li>
+<li>stereo_image_proc</li>
+</ul>
+</li>
+</ul>
+<h1>Generic camera node</h1>
+<ul>
+<li>In ROS, camera is also defined as a node which gives the raw images.</li>
+<li>Generic camera node is defined by following parameters:</li>
+</ul>
+<h2>Published Topics</h2>
+<ul>
+<li>image_raw (sensor_msgs/Image)<br/>
+    The unprocessed image data.</li>
+<li>camera_info (sensor_msgs/CameraInfo)<br/>
+    Contains the camera calibration (if calibrated) and extra data about the camera configuration.</li>
+</ul>
+<h2>Services</h2>
+<ul>
+<li>set_camera_info (sensor_msgs/SetCameraInfo)<br/>
+        Used by camera_calibration to save the calibration parameters.</li>
+</ul>
+<h2>Moreover</h2>
+<ul>
+<li>'stereo_image_proc' has runtime-configurable stereo processing parameters of its own</li>
+<li>rqt_reconfigure is useful for tweaking configuration to get best results</li>
+</ul>
+<h1>'camera_calibration' package</h1>
+<h1>'image_proc' package</h1>
+<ul>
+<li>http://wiki.ros.org/image_proc</li>
+<li>The raw image can be piped through the image_proc to remove camera distortion.</li>
+<li>If necessary, will convert Bayer or YUV422 format image data to color image.</li>
+</ul>
+<p><code>$ ROS_NAMESPACE=my_camera rosrun image_proc image_proc</code></p>
+<p><img src="image_proc.png"/></p>
+</section></body>
+</html>

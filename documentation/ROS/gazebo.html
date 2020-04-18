@@ -33,17 +33,18 @@ Change the URL to ignitionrobotics in ~/.ignition/fuel/config.yaml</p>
 <li>Then place all models inside: ~/.gazebo/models/</li>
 </ul>
 <h1>spawn_model</h1>
-<p>```
-usage: spawn_model [-h] (-urdf | -sdf)
-                   (-file FILE_NAME | -param PARAM_NAME | -database MODEL_NAME | -stdin)
-                   -model MODEL_NAME [-reference_frame REFERENCE_FRAME]
-                   [-gazebo_namespace GAZEBO_NAMESPACE]
-                   [-robot_namespace ROBOT_NAMESPACE] [-unpause]
-                   [-wait MODEL_NAME] [-x X] [-y Y] [-z Z] [-R R] [-P P]
-                   [-Y Y] [-J JOINT_NAME JOINT_POSITION] [-package_to_model]
-                   [-b]</p>
-<p>Spawn a model in gazebo using the ROS API</p>
-<p>optional arguments:
+<pre><code>usage: spawn_model [-h] (-urdf | -sdf)
+                  (-file FILE_NAME | -param PARAM_NAME | -database MODEL_NAME | -stdin)
+                  -model MODEL_NAME [-reference_frame REFERENCE_FRAME]
+                  [-gazebo_namespace GAZEBO_NAMESPACE]
+                  [-robot_namespace ROBOT_NAMESPACE] [-unpause]
+                  [-wait MODEL_NAME] [-x X] [-y Y] [-z Z] [-R R] [-P P]
+                  [-Y Y] [-J JOINT_NAME JOINT_POSITION] [-package_to_model]
+                  [-b]
+
+Spawn a model in gazebo using the ROS API
+
+optional arguments:
   -h, --help            show this help message and exit
   -urdf                 Incoming xml is in urdf format
   -sdf                  Incoming xml is in sdf format
@@ -78,7 +79,7 @@ usage: spawn_model [-h] (-urdf | -sdf)
                         filename="model://..."
   -b                    bond to gazebo and delete the model when this program
                         is interrupted
-```</p>
+</code></pre>
 <h2>Delete a model: (using ros service)</h2>
 <p>rosservice call gazebo/delete_model '{model_name: stereo_bot_2}'</p>
 </section></body>

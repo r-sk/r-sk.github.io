@@ -7,7 +7,7 @@
 header{
     height: 100px;
     /* width: 100px; */
-    background-color: #4b9df0;
+    background-color: #9b9bff;
     padding: 50px;
 }
 
@@ -21,7 +21,7 @@ header{
 }
 
 .project{
-    background-color: #7ab1d6;
+    background-color: #9b9bff;
     /* padding: 10px; */
     height: 100px;
     width: 100px;
@@ -43,7 +43,7 @@ header{
   }
   /* #4CAF50; */
   .project a:hover:not(.active) {
-    background-color: rgb(0, 110, 173);
+    background-color: #6b6bf5;
     color: white;
   }
 

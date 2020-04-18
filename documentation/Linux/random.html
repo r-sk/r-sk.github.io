@@ -15,6 +15,8 @@
 <img src="images/robot_icon.png"/>
 </a>
 <a href="index.html">Introduction</a>
+<a href="file_system.html">File System</a>
+<a href="terminal_commands.html">Terminal Commands</a>
 <a href="random.html">Random</a>
 </div>
 <section class="vscode-light">
@@ -23,6 +25,63 @@
 <li>The clipboard is not stored in the filesystem or even in a particular location in memory.</li>
 <li>When you copy text in an application (whether by selecting text, for the primary selection, or by an explicit 'copy' operation for clipboard selection), the application where you copy alerts the X server that it now owns that particular selection.</li>
 <li>When you paste, the application you paste into sends a request to the X server, which is redirected to the application that owns the selection. </li>
+</ul>
+<h1>Copy clipboard image to a file</h1>
+<ul>
+<li>
+<p><strong>xclip</strong> can do this task</p>
+<pre><code>sudo apt-get install xclip
+</code></pre>
+</li>
+<li>
+<p>First copy any image to clipboard or Ctrl+Shift+PrintScreen to copy screenshot to a file.</p>
+</li>
+<li>
+<p>To see if there is image in clipboard:</p>
+<pre><code>$ xclip -selection clipboard -t TARGETS -o
+</code></pre>
+</li>
+<li>
+<p>It outputs</p>
+<pre><code>TIMESTAMP
+TARGETS
+SAVE_TARGETS
+MULTIPLE
+image/png (This is what you are intrested in)
+text/html
+</code></pre>
+</li>
+<li>
+<p>To save this image to a file:</p>
+<pre><code>$ xclip -selection clipboard -t image/png -o &gt; /path/to/dir/filename.png
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>Always make sure you donot copy anything else (eg. text) after you have copied image in order to see image/png in target.<br/>
+Else, your clipboard will only have text and you can't find image/png target</p>
+</blockquote>
+<h1>Rename Terminal Tabs</h1>
+<ul>
+<li>If there are plenty of Tabs, it is so frustating to find the tab we want.</li>
+<li>It could be handy if each Terminal Tabs have different name.</li>
+<li>
+<p>Just add following function to .bashrc ;</p>
+<pre><code>function title()
+{
+        if [[ -z "$ORIG" ]]; then
+        ORIG=$PS1
+        fi
+        TITLE="\[\e]2;$*\a\]"
+        PS1=${ORIG}${TITLE}
+}
+</code></pre>
+</li>
+<li>
+<p>Now you can easily rename tabs by:</p>
+<pre><code>title &lt;name you like&gt;
+</code></pre>
+</li>
 </ul>
 </section></body>
 </html>

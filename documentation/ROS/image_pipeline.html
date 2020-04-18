@@ -59,14 +59,93 @@
 <li>'stereo_image_proc' has runtime-configurable stereo processing parameters of its own</li>
 <li>rqt_reconfigure is useful for tweaking configuration to get best results</li>
 </ul>
+<h1>Camera Frame Vs Optical Frame</h1>
+<p><img src="images/camera_frame.png" width="500px"/> </p>
+<ul>
+<li>Camera Frame or Camera Link is where actual camera sits and take picture from.</li>
+<li>Optical Frame is where Camera publishes the picture it have taken</li>
+<li>This is necessary because, picture that camera takes has coordinate convention like in computer monitors. That is:<ul>
+<li>x-axis = form left to right </li>
+<li>y-axis = from top to bottom</li>
+<li>z-axis = towards the screen/scene</li>
+</ul>
+</li>
+<li>This can be seen in above diagram</li>
+<li>Hence we need to define new frame/link which similar convention and publish all images in that frame.</li>
+<li>In this picture, the odd one frame at top is optical frame.  </li>
+</ul>
+<p><img src="images/camera_frame_2.png" width="500px"/> </p>
+<p>Defining Optical Frame:</p>
+<pre><code>&lt;joint name="camera_joint" type="fixed"&gt;
+    &lt;origin xyz="0.15 0 0.15" rpy="0 0 0"/&gt;
+    &lt;parent link="base_link"/&gt;
+    &lt;child link="camera_link"/&gt;
+&lt;/joint&gt;
+
+&lt;link name="camera_link"&gt;
+....
+&lt;/link&gt;
+
+&lt;joint name="camera_optical_joint" type="fixed"&gt;
+    &lt;origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/&gt;
+    &lt;parent link="camera_link"/&gt;
+    &lt;child link="camera_link_optical"/&gt;
+&lt;/joint&gt;
+
+&lt;link name="camera_optical_link"/&gt;
+
+&lt;gazebo reference="camera_link"&gt;
+    &lt;sensor type="camera" name="camera"&gt;
+    ...
+        &lt;camera name="head"&gt;
+            ...
+        &lt;/camera&gt;
+        &lt;plugin name="camera_controller" filename="libgazebo_ros_camera.so"&gt;
+            ...
+            &lt;cameraName&gt;            mono_bot                &lt;/cameraName&gt;
+            &lt;imageTopicName&gt;        image_raw               &lt;/imageTopicName&gt;
+            &lt;cameraInfoTopicName&gt;   camera_info             &lt;/cameraInfoTopicName&gt;
+            &lt;frameName&gt;             camera_optical_link     &lt;/frameName&gt;
+            ...
+        &lt;/plugin&gt;
+    &lt;/sensor&gt;
+&lt;/gazebo&gt;
+</code></pre>
+<!-- ######################################################################################################################## -->
+<p><joint name="camera_optical_joint" type="fixed">
+<!-- these values have to be these values otherwise the gazebo camera
+        image won't be aligned properly with the frame it is supposedly
+        originating from -->
+<origin rpy="${-pi/2} 0 ${-pi/2}" xyz="0 0 0"></origin>
+<parent link="camera_link"></parent>
+<child link="camera_link_optical"></child>
+</joint></p>
 <h1>'camera_calibration' package</h1>
 <h1>'image_proc' package</h1>
 <ul>
-<li>http://wiki.ros.org/image_proc</li>
-<li>The raw image can be piped through the image_proc to remove camera distortion.</li>
+<li>See: <a href="http://wiki.ros.org/image_proc">image_proc</a></li>
+<li>This package will remove camera distortion.</li>
+<li>i.e Takes raw images and gives rectified images.</li>
 <li>If necessary, will convert Bayer or YUV422 format image data to color image.</li>
 </ul>
-<p><code>$ ROS_NAMESPACE=my_camera rosrun image_proc image_proc</code></p>
-<p><img src="image_proc.png"/></p>
+<p><img src="images/image_proc.png"/></p>
+<h1>'image_view' package</h1>
+<ul>
+<li>See: <a href="http://wiki.ros.org/image_view?distro=melodic">image_view</a></li>
+<li>
+<p>Viewing single image:</p>
+<pre><code>rosrun image_view image_view image:=&lt;image topic&gt;
+eg:
+rosrun image_view image_view image:=/camera/image
+</code></pre>
+</li>
+<li>
+<p>Viewing stereo image:</p>
+<pre><code>rosrun image_view stereo_view stereo:=&lt;stereo namespace&gt; image:=&lt;image topic identifier&gt;
+eg:
+rosrun image_view stereo_view stereo:=/my_stereo_cam image:=image_rect_color
+</code></pre>
+</li>
+</ul>
 </section></body>
 </html>

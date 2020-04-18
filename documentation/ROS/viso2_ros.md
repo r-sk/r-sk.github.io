@@ -1,6 +1,6 @@
 # 'viso2_ros' package
 
-* http://wiki.ros.org/viso2_ros
+* See: [viso2](http://wiki.ros.org/viso2_ros)
 * Function: Estimate camera motion based on incoming rectified images from calibrated cameras
 * Has 3 nodes:
     * mono_odometer
@@ -10,6 +10,11 @@
 * Stereo odometer just needs stereo images.
 * Tf tree structure needed:  
         world → odom → base_link → camera
+
+> Well Looks like VISO2 don't use base_footprint as its root link  
+> VISO2 is preety old and back then, base_link was used as root link  
+> So just omit base_footprint link in the URDF file
+
 * This package publishes:  
         odom → base_link
 * For this to work, it needs to know:  
@@ -21,8 +26,8 @@
 
 
 
-
 # Extras
 
 * Uses **dense** stereo point clouds coming from stereo_image_proc
+* using in Empty env wonk work hola ni aba
 

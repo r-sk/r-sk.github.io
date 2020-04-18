@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="file_system.html">File System</a>
+<a href="terminal_commands.html">Terminal Commands</a>
+<a href="random.html">Random</a>
+</div>
+<section class="vscode-light">
+<h1>Various directories</h1>
+<h2>bin</h2>
+<ul>
+<li>binaries</li>
+<li>programs and applications are stored here</li>
+<li>eg: ls, pwd, chmod, mkdir, grep etc</li>
+</ul>
+<h2>sbin</h2>
+<ul>
+<li>System binaries</li>
+<li>System administrator uses</li>
+<li>Standard user not have access wothout permission</li>
+</ul>
+<h2>boot</h2>
+<ul>
+<li>all files system needs to boot the machine</li>
+<li>boot loader lives here</li>
+</ul>
+<h2>dev</h2>
+<ul>
+<li>devices</li>
+<li>This is where all your devices lives</li>
+<li>eg: mouse, keyboard, monitor, speakers, disks, webcam etc</li>
+<li>Disk will be in : dev/sda</li>
+<li>dev/sda1 , dev/sda2 are partitions</li>
+</ul>
+<h2>etc</h2>
+<ul>
+<li>et-cetera</li>
+<li>all the configuration files of the system </li>
+</ul>
+<h2>home</h2>
+<ul>
+<li>all user files lives here, shown on side bar</li>
+<li>Personal files and documents</li>
+<li>Each user has their own home folder</li>
+<li>.icons , . themes are here too, which helps in customization</li>
+</ul>
+<h2>lib, lib32, lib64</h2>
+<ul>
+<li>libraies lives here</li>
+</ul>
+<h2>media, mnt</h2>
+<ul>
+<li>mnt = mount</li>
+<li>Other mounted drives</li>
+<li>all the mounted floppydrives, pendrives, external harddrives, network drives, secondary harddrives etc</li>
+<li>D:, E: etc as shown in windows lives here</li>
+<li>OS automatically mount the added drives in media directory</li>
+<li>If you mount drives manually, mount it inside mnt directory</li>
+</ul>
+<h2>opt</h2>
+<ul>
+<li>optional</li>
+<li>some programs are stored here</li>
+<li>Eg: ROS, googlechrome , teamviwer, virtualbox etc</li>
+<li>this is where we can manually install softwares</li>
+</ul>
+<h2>proc</h2>
+<ul>
+<li>process</li>
+<li>information about system processes and resources</li>
+<li>every process has directory here with directory named with corresponding process ID</li>
+<li>some other files: cpuinfo, uptime etc</li>
+<li>Try looking into these files</li>
+</ul>
+<h2>root</h2>
+<ul>
+<li>root user's home directory</li>
+</ul>
+<h2>run</h2>
+<ul>
+<li>runs on RAM</li>
+<li>everything is gone when shutdown or restart</li>
+<li>contains info that needs during boot</li>
+</ul>
+<h2>snap</h2>
+<ul>
+<li>snap packages are stored</li>
+<li>snap packages are self-contained packages</li>
+</ul>
+<h2>srv</h2>
+<ul>
+<li>service</li>
+<li>service data are stored</li>
+<li>if you launch web server, ftp server , the files that can be access by external user are stored here</li>
+<li>usually empty if there are no services</li>
+</ul>
+<h2>sys</h2>
+<ul>
+<li>system</li>
+<li>to interact with kernel</li>
+<li>created everytime the system boots up</li>
+</ul>
+<h2>tmp</h2>
+<ul>
+<li>temporary</li>
+<li>temporaty files stored, cleared during bootup</li>
+</ul>
+<h2>usr</h2>
+<ul>
+<li>universal system resources, eg: icons</li>
+<li>User application space</li>
+<li>Application used by user are stored here</li>
+</ul>
+<h2>var</h2>
+<ul>
+<li>variable</li>
+<li>logs and temp files for system</li>
+<li>constantly grows in size as you use the system</li>
+</ul>
+<h1>Some important files</h1>
+<h3>~/.bashrc</h3>
+<p>File that is run every time you open an terminal</p>
+<h3>~/.bash_history</h3>
+<p>List of all commands typed in terminal</p>
+</section></body>
+</html>

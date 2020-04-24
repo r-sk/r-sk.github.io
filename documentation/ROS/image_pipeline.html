@@ -15,8 +15,9 @@
 <img src="images/robot_icon.png"/>
 </a>
 <a href="index.html">Introduction</a>
-<a href="gazebo.html">Gazebo</a>
 <a href="tf.html">Tf</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="gazebo_plugins.html">Gazebo Plugins</a>
 <a href="ros_navigation_stack.html">ROS Navigation Stack</a>
 <a href="image_pipeline.html">Image Pipeline</a>
 <a href="viso2_ros.html">VISO2 ROS</a>
@@ -89,7 +90,7 @@
 &lt;joint name="camera_optical_joint" type="fixed"&gt;
     &lt;origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/&gt;
     &lt;parent link="camera_link"/&gt;
-    &lt;child link="camera_link_optical"/&gt;
+    &lt;child link="camera_optical_link"/&gt;
 &lt;/joint&gt;
 
 &lt;link name="camera_optical_link"/&gt;
@@ -111,16 +112,8 @@
     &lt;/sensor&gt;
 &lt;/gazebo&gt;
 </code></pre>
-<!-- ######################################################################################################################## -->
-<p><joint name="camera_optical_joint" type="fixed">
-<!-- these values have to be these values otherwise the gazebo camera
-        image won't be aligned properly with the frame it is supposedly
-        originating from -->
-<origin rpy="${-pi/2} 0 ${-pi/2}" xyz="0 0 0"></origin>
-<parent link="camera_link"></parent>
-<child link="camera_link_optical"></child>
-</joint></p>
 <h1>'camera_calibration' package</h1>
+<p>this is package to calibrate the camera.</p>
 <h1>'image_proc' package</h1>
 <ul>
 <li>See: <a href="http://wiki.ros.org/image_proc">image_proc</a></li>
@@ -129,6 +122,13 @@
 <li>If necessary, will convert Bayer or YUV422 format image data to color image.</li>
 </ul>
 <p><img src="images/image_proc.png"/></p>
+<h1>'stereo_image_proc' package</h1>
+<pre><code>$ ROS_NAMESPACE=&lt;stereo namespace&gt; rosrun stereo_image_proc stereo_image_proc
+</code></pre>
+<ul>
+<li>Point clouds are generated in the optical frame of the left_camera_link</li>
+</ul>
+<p><img src="images/stereo_optical_frame.png"/></p>
 <h1>'image_view' package</h1>
 <ul>
 <li>See: <a href="http://wiki.ros.org/image_view?distro=melodic">image_view</a></li>
@@ -143,9 +143,31 @@ rosrun image_view image_view image:=/camera/image
 <p>Viewing stereo image:</p>
 <pre><code>rosrun image_view stereo_view stereo:=&lt;stereo namespace&gt; image:=&lt;image topic identifier&gt;
 eg:
-rosrun image_view stereo_view stereo:=/my_stereo_cam image:=image_rect_color
+rosrun image_view stereo_view stereo:=my_stereo_cam image:=image_rect_color
 </code></pre>
 </li>
+</ul>
+<p>Error:</p>
+<pre><code>rashik@dell:~$ rosrun image_view stereo_view stereo:=stereo_bot image:=image_raw[ WARN] [1587267261.512732559]: There is a delay between when the camera drivers publish the raw images and when stereo_image_proc publishes the computed point cloud. stereo_view may fail to synchronize these topics without a large queue_size.
+[ INFO] [1587267261.727106714]: Subscribing to:
+    * /stereo_bot/left/image_raw
+    * /stereo_bot/right/image_raw
+    * /stereo_bot/disparity
+[ WARN] [1587267276.820011223, 90.509000000]: [stereo_view] Low number of synchronized left/right/disparity triplets received.
+Left images received:      68 (topic '/stereo_bot/left/image_raw')
+Right images received:     68 (topic '/stereo_bot/right/image_raw')
+Disparity images received: 0 (topic '/stereo_bot/disparity')
+Synchronized triplets: 0
+Possible issues:
+    * stereo_image_proc is not running.
+    Does `rosnode info /stereo_view_1587267261511759255` show any connections?
+    * The cameras are not synchronized.
+    Try restarting stereo_view with parameter _approximate_sync:=True
+    * The network is too slow. One or more images are dropped from each triplet.
+    Try restarting stereo_view, increasing parameter 'queue_size' (currently 5)
+</code></pre>
+<ul>
+<li>stereo_view seems to work only while running stereo_image_proc (no ides why...)</li>
 </ul>
 </section></body>
 </html>

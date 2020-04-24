@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="esp32.html">ESP 32</a>
+</div>
+<section class="vscode-light">
+<h1>Micropython - Before you begin</h1>
+<ul>
+<li>Download micropython firmware for esp32 from: <a href="https://micropython.org/download/esp32/">ESP32 frimware</a></li>
+</ul>
+<h2>ESPTool</h2>
+<ul>
+<li>This tool is used to flash new firmware to esp32.</li>
+<li>
+<p>Install it :</p>
+<pre><code>pip install esptool
+</code></pre>
+</li>
+<li>
+<p>I installed python2 version, as pip3 couldnt find python3 version of this software.</p>
+</li>
+<li>
+<p>It has wide range of functions besides just flashing firmware. Just do esptool.py --help to know more what it can do</p>
+</li>
+<li>
+<p>First erase flash:</p>
+<pre><code>esptool.py --port /dev/ttyUSB0 erase_flash
+</code></pre>
+</li>
+<li>
+<p>Flash new firmware which you just downloaded:</p>
+<pre><code>esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 &lt;firmware-name&gt;.bin
+</code></pre>
+</li>
+</ul>
+<h1>Common tools for programming and REPL</h1>
+<h2>Ampy</h2>
+<ul>
+<li>No REPL</li>
+<li>For file transfer</li>
+</ul>
+<blockquote>
+<p>Can run program directly from the file present in laptop (no need to send file to ESP32)
+This makes this thing useful in developing phase</p>
+</blockquote>
+<pre><code>$ ampy -p /dev/ttyUSB0 run main.py
+</code></pre>
+<ul>
+<li>But due to no REPL, stuffs that gets printed during running any code cannot be seen in the terminal</li>
+<li>Other serial communication softwares like Putty can be used for serial REPL</li>
+<li>But, cannot use ampy while port is busy with serial REPL</li>
+</ul>
+<h2>ESPlorer</h2>
+<ul>
+<li>ToDo</li>
+</ul>
+<h2>Putty</h2>
+<ul>
+<li>For REPL</li>
+<li>For serial Communication</li>
+</ul>
+<h2>Picocom</h2>
+<h2>Rshell</h2>
+<ul>
+<li>Both REPL and file transfer</li>
+</ul>
+<h2>Web-REPl</h2>
+<blockquote>
+<p>If there is infinite looping in boot.py or main.py then, this might not work</p>
+</blockquote>
+<ul>
+<li>As soon as esp32 restarts, it runs boot.py, then main.py and if it gets stuck in while(1) loop, we cannot access to web REPL</li>
+<li>To avoid this, keep delay, enough to log in just after webrepl.start()</li>
+<li>And connect the web REPL within this time</li>
+</ul>
+<h1>Pin Configuration</h1>
+<ul>
+<li>The board I have used was <strong>Adafruit HUZZAH32 - ESP32 Feather</strong>. Its pin configuration is shown below.</li>
+<li>Everything you need to know about this board: <a href="https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview">Adafruit HUZZAH32 - ESP32 Feather</a></li>
+</ul>
+<p><img src="images/esp32_feather.png" width="700"/></p>
+<ul>
+<li>Other <strong>nodeMCU</strong> boards will have slightly different configuration.</li>
+<li>In Feather, PIN13 is connected to onboard LED</li>
+</ul>
+<h1>Power Management</h1>
+<ul>
+<li>To do list</li>
+<li>In feather, we can just connect a battery which will run only when no power and even charges the battery with 200mA when power is available</li>
+<li>How cool is that !!!</li>
+</ul>
+<h1>Multi-threading</h1>
+<ul>
+<li>To-Do list</li>
+</ul>
+<h1>Error debugging</h1>
+<ul>
+<li>Always and always keep and led which will glow when 'wlan.isconnected()' is true. (Not Tested Yet)</li>
+<li>Update this as frequent as possible</li>
+<li>MY major problem was being unable to connect to internet without any reason, when ypu run same code again and again, sometimes it is not being connected</li>
+<li>hard to debug without any good indicator</li>
+</ul>
+<h1>Others</h1>
+<ul>
+<li>https://github.com/scientifichackers/ampy/issues/13</li>
+</ul>
+</section></body>
+</html>

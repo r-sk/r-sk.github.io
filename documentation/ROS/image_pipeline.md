@@ -47,7 +47,7 @@
 <img src="images/camera_frame_2.png" width=500px> 
 
 Defining Optical Frame:
-
+    
     <joint name="camera_joint" type="fixed">
         <origin xyz="0.15 0 0.15" rpy="0 0 0"/>
         <parent link="base_link"/>
@@ -61,7 +61,7 @@ Defining Optical Frame:
     <joint name="camera_optical_joint" type="fixed">
         <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
         <parent link="camera_link"/>
-        <child link="camera_link_optical"/>
+        <child link="camera_optical_link"/>
     </joint>
 
     <link name="camera_optical_link"/>
@@ -84,21 +84,9 @@ Defining Optical Frame:
     </gazebo>
        
 
-	
-  <!-- ######################################################################################################################## -->
-
-   <joint name="camera_optical_joint" type="fixed">
-    <!-- these values have to be these values otherwise the gazebo camera
-        image won't be aligned properly with the frame it is supposedly
-        originating from -->
-    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
-    <parent link="camera_link"/>
-    <child link="camera_link_optical"/>
-  </joint>
-
-
 # 'camera_calibration' package
 
+this is package to calibrate the camera.
 
 # 'image_proc' package
 
@@ -108,6 +96,14 @@ Defining Optical Frame:
 * If necessary, will convert Bayer or YUV422 format image data to color image.
 
 <img src="images/image_proc.png">
+
+# 'stereo_image_proc' package
+
+    $ ROS_NAMESPACE=<stereo namespace> rosrun stereo_image_proc stereo_image_proc
+
+* Point clouds are generated in the optical frame of the left_camera_link
+
+<img src='images/stereo_optical_frame.png'>
 
 
 # 'image_view' package
@@ -123,4 +119,26 @@ Defining Optical Frame:
   
         rosrun image_view stereo_view stereo:=<stereo namespace> image:=<image topic identifier>
         eg:
-        rosrun image_view stereo_view stereo:=/my_stereo_cam image:=image_rect_color
+        rosrun image_view stereo_view stereo:=my_stereo_cam image:=image_rect_color
+
+Error:
+
+    rashik@dell:~$ rosrun image_view stereo_view stereo:=stereo_bot image:=image_raw[ WARN] [1587267261.512732559]: There is a delay between when the camera drivers publish the raw images and when stereo_image_proc publishes the computed point cloud. stereo_view may fail to synchronize these topics without a large queue_size.
+    [ INFO] [1587267261.727106714]: Subscribing to:
+        * /stereo_bot/left/image_raw
+        * /stereo_bot/right/image_raw
+        * /stereo_bot/disparity
+    [ WARN] [1587267276.820011223, 90.509000000]: [stereo_view] Low number of synchronized left/right/disparity triplets received.
+    Left images received:      68 (topic '/stereo_bot/left/image_raw')
+    Right images received:     68 (topic '/stereo_bot/right/image_raw')
+    Disparity images received: 0 (topic '/stereo_bot/disparity')
+    Synchronized triplets: 0
+    Possible issues:
+        * stereo_image_proc is not running.
+        Does `rosnode info /stereo_view_1587267261511759255` show any connections?
+        * The cameras are not synchronized.
+        Try restarting stereo_view with parameter _approximate_sync:=True
+        * The network is too slow. One or more images are dropped from each triplet.
+        Try restarting stereo_view, increasing parameter 'queue_size' (currently 5)
+
+* stereo_view seems to work only while running stereo_image_proc (no ides why...)

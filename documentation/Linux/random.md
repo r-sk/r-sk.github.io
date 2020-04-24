@@ -37,15 +37,42 @@
 * It could be handy if each Terminal Tabs have different name.
 * Just add following function to .bashrc :
   
-        function title()
-        {
-                if [[ -z "$ORIG" ]]; then
-                ORIG=$PS1
-                fi
-                TITLE="\[\e]2;$*\a\]"
-                PS1=${ORIG}${TITLE}
-        }
+       function title()
+       {
+               if [[ -z "$ORIG" ]]; then
+               ORIG=$PS1
+               fi
+               TITLE="\[\e]2;$*\a\]"
+               PS1=${ORIG}${TITLE}
+       }
 
 * Now you can easily rename tabs by:
   
-        title <name you like>
+      title <name you like>
+
+# Resize and Reposition windows from terminal
+
+* Tools like **xdotool** and **wmctrl** can do this task
+* We'll use wmctrl. Install it using:
+
+      sudo apt-get install wmctrl
+
+* See: [wmctrl](http://manpages.ubuntu.com/manpages/bionic/en/man1/wmctrl.1.html) for more details.
+
+* Un-maximize windows:
+  
+      wmctrl -r Gazebo -b remove,maximized_vert,maximized_horz
+      wmctrl -r RViz -b remove,maximized_vert,maximized_horz
+
+* Resize and Reposition windows:
+
+      wmctrl -r Gazebo -e 0,0,0,933,1024
+      wmctrl -r RViz -e 0,977,0,933,1024
+
+
+# My laptop 
+
+* Graphics card: AMD RadeonTM R7 M445
+* https://www.videocardbenchmark.net/directCompute.html
+
+# dialout group ????

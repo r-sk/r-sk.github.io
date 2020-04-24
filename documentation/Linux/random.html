@@ -66,22 +66,47 @@ Else, your clipboard will only have text and you can't find image/png target</p>
 <li>If there are plenty of Tabs, it is so frustating to find the tab we want.</li>
 <li>It could be handy if each Terminal Tabs have different name.</li>
 <li>
-<p>Just add following function to .bashrc ;</p>
-<pre><code>function title()
-{
-        if [[ -z "$ORIG" ]]; then
-        ORIG=$PS1
-        fi
-        TITLE="\[\e]2;$*\a\]"
-        PS1=${ORIG}${TITLE}
-}
-</code></pre>
+<p>Just add following function to .bashrc :</p>
+<p>function title()
+   {
+           if [[ -z "$ORIG" ]]; then
+           ORIG=$PS1
+           fi
+           TITLE="[\e]2;$*\a]"
+           PS1=${ORIG}${TITLE}
+   }</p>
 </li>
 <li>
 <p>Now you can easily rename tabs by:</p>
-<pre><code>title &lt;name you like&gt;
-</code></pre>
+<p>title <name like="" you=""></name></p>
 </li>
 </ul>
+<h1>Resize and Reposition windows from terminal</h1>
+<ul>
+<li>Tools like <strong>xdotool</strong> and <strong>wmctrl</strong> can do this task</li>
+<li>
+<p>We'll use wmctrl. Install it using:</p>
+<p>sudo apt-get install wmctrl</p>
+</li>
+<li>
+<p>See: <a href="http://manpages.ubuntu.com/manpages/bionic/en/man1/wmctrl.1.html">wmctrl</a> for more details.</p>
+</li>
+<li>
+<p>Un-maximize windows:</p>
+<p>wmctrl -r Gazebo -b remove,maximized_vert,maximized_horz
+  wmctrl -r RViz -b remove,maximized_vert,maximized_horz</p>
+</li>
+<li>
+<p>Resize and Reposition windows:</p>
+<p>wmctrl -r Gazebo -e 0,0,0,933,1024
+  wmctrl -r RViz -e 0,977,0,933,1024</p>
+</li>
+</ul>
+<h1>My laptop</h1>
+<ul>
+<li>Graphics card: AMD RadeonTM R7 M445</li>
+<li>https://www.videocardbenchmark.net/directCompute.html</li>
+</ul>
+<h1>dialout group ????</h1>
 </section></body>
 </html>

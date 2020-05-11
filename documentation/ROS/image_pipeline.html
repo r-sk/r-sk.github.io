@@ -21,6 +21,8 @@
 <a href="ros_navigation_stack.html">ROS Navigation Stack</a>
 <a href="image_pipeline.html">Image Pipeline</a>
 <a href="viso2_ros.html">VISO2 ROS</a>
+<a href="arduino_ros.html">Arduino ROS</a>
+<a href="uncategorized.html">Uncategorized</a>
 </div>
 <section class="vscode-light">
 <h1>image_pipeline</h1>
@@ -169,5 +171,25 @@ Possible issues:
 <ul>
 <li>stereo_view seems to work only while running stereo_image_proc (no ides why...)</li>
 </ul>
+<h1>Others</h1>
+<p>Image Synchronization:<br/>
+https://blog.csdn.net/qq_38288618/article/details/78486846?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_source=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1</p>
+<h1>Important topics to record:</h1>
+<pre><code>/clock
+/odom
+
+/stereo_bot/left/camera_info
+/stereo_bot/left/image_raw/compressed
+/stereo_bot/left/image_rect/compressed
+/stereo_bot/left/image_rect_color/compressed
+
+/stereo_bot/right/camera_info
+/stereo_bot/right/image_raw/compressed
+/stereo_bot/right/image_rect/compressed
+
+/tf
+/tf_static
+</code></pre>
+<p>/clock /odom /stereo_bot/left/camera_info /stereo_bot/left/image_raw/compressed /stereo_bot/left/image_rect/compressed /stereo_bot/left/image_rect_color/compressed /stereo_bot/right/camera_info /stereo_bot/right/image_raw/compressed /stereo_bot/right/image_rect/compressed /tf /tf_static</p>
 </section></body>
 </html>

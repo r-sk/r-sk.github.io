@@ -1,7 +1,52 @@
-# Micropython - Before you begin
+# ESP32 Features
 
-* Download micropython firmware for esp32 from: [ESP32 frimware](https://micropython.org/download/esp32/)
+## Pin Configuration
 
+* The board I have used was **Adafruit HUZZAH32 - ESP32 Feather**. Its pin configuration is shown below.
+* Everything you need to know about this board: [Adafruit HUZZAH32 - ESP32 Feather](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview)
+
+<img src='images/esp32_feather.png' width='700'>
+
+* Other **nodeMCU** boards will have slightly different configuration.
+* In Feather, **PIN13** is connected to **onboard LED**
+
+## Power Management
+
+* To do list
+* In feather, we can just connect a battery which will run only when no power and even charges the battery with 200mA when power is available. How cool is that !!!
+
+## Multi-threading
+
+* To-Do list
+
+
+# ESP32 Platforms
+
+* ESP32 can be used with various platforms such as:
+  * Arduino IDE
+  * micropython
+  * ESP-IDF (IOT Development Framework)
+  * MQTT
+
+# ESP32 using Arduino IDE
+
+## Arduino IDE Preparations
+
+* Add following URL in File -> Preferences -> Additional Board Manager URLs
+
+        https://dl.espressif.com/dl/package_esp32_index.json
+
+* From Tools -> Board -> Board Manager... , search and install ESP32
+* Thats it, you are ready to upload the code
+
+
+# ESP32 using Micropython
+
+## Preparation
+
+* Forst, you need to install micropython frimware to esp32
+* Download the firmware for esp32 from: [ESP32 frimware](https://micropython.org/download/esp32/)
+  
 ## ESPTool
 
 * This tool is used to flash new firmware to esp32.
@@ -20,9 +65,9 @@
 
         esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 <firmware-name>.bin
 
-# Common tools for programming and REPL
+## Common tools for programming and REPL
 
-## Ampy
+### Ampy
 
 * No REPL
 * For file transfer
@@ -37,18 +82,18 @@
 * But, cannot use ampy while port is busy with serial REPL
 
 
-## ESPlorer
+### ESPlorer
 
 * ToDo
 
-## Putty
+### Putty
 
 * For REPL
 * For serial Communication
   
-## Picocom
+### Picocom
 
-## Rshell
+### Rshell
 
 * Both REPL and file transfer
 
@@ -60,28 +105,7 @@
 * To avoid this, keep delay, enough to log in just after webrepl.start()
 * And connect the web REPL within this time
 
-# Pin Configuration
 
-* The board I have used was **Adafruit HUZZAH32 - ESP32 Feather**. Its pin configuration is shown below.
-* Everything you need to know about this board: [Adafruit HUZZAH32 - ESP32 Feather](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview)
-
-<img src='images/esp32_feather.png' width='700'>
-
-* Other **nodeMCU** boards will have slightly different configuration.
-* In Feather, PIN13 is connected to onboard LED
-
-# Power Management
-
-* To do list
-* In feather, we can just connect a battery which will run only when no power and even charges the battery with 200mA when power is available
-* How cool is that !!!
-
-
-
-
-# Multi-threading
-
-* To-Do list
 
 # Error debugging
 
@@ -93,6 +117,8 @@
 # Others
 
 * https://github.com/scientifichackers/ampy/issues/13
+
+
 
 
 

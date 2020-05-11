@@ -142,3 +142,27 @@ Error:
         Try restarting stereo_view, increasing parameter 'queue_size' (currently 5)
 
 * stereo_view seems to work only while running stereo_image_proc (no ides why...)
+
+# Others
+
+Image Synchronization:  
+https://blog.csdn.net/qq_38288618/article/details/78486846?ops_request_misc=&request_id=&biz_id=102&utm_source=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1
+
+# Important topics to record:
+
+    /clock
+    /odom
+
+    /stereo_bot/left/camera_info
+    /stereo_bot/left/image_raw/compressed
+    /stereo_bot/left/image_rect/compressed
+    /stereo_bot/left/image_rect_color/compressed
+
+    /stereo_bot/right/camera_info
+    /stereo_bot/right/image_raw/compressed
+    /stereo_bot/right/image_rect/compressed
+
+    /tf
+    /tf_static
+
+/clock /odom /stereo_bot/left/camera_info /stereo_bot/left/image_raw/compressed /stereo_bot/left/image_rect/compressed /stereo_bot/left/image_rect_color/compressed /stereo_bot/right/camera_info /stereo_bot/right/image_raw/compressed /stereo_bot/right/image_rect/compressed /tf /tf_static

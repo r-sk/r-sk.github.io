@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="tf.html">Tf</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="gazebo_plugins.html">Gazebo Plugins</a>
+<a href="ros_navigation_stack.html">ROS Navigation Stack</a>
+<a href="image_pipeline.html">Image Pipeline</a>
+<a href="viso2_ros.html">VISO2 ROS</a>
+<a href="arduino_ros.html">Arduino ROS</a>
+<a href="uncategorized.html">Uncategorized</a>
+</div>
+<section class="vscode-light">
+<h1>Introduction</h1>
+<ul>
+<li>See: <a href="http://wiki.ros.org/rosserial">rosserial</a></li>
+<li>Helps for the communication between ROS nodes in various devices via <strong>serial port</strong> or <strong>network socket</strong>.</li>
+<li>Devices(nodes) running rosserial code require a node on the host machine to bridge the connection from the serial protocol to the more general ROS network.</li>
+<li>This node in host can be run using following packages:</li>
+<li>rosserial_python (python based)</li>
+<li>rosserial_server (C++ based)</li>
+<li>Various client libraries are available for easy communication with client ros nodes. Some of these client libraries are:</li>
+<li>rosserial_arduino (for arduino, esp32, esp8266)</li>
+<li>rosserial_windows (for windows applications)</li>
+<li>rosserial_stm32 (for stm32)</li>
+<li>etc...</li>
+<li>Installation<pre><code>sudo apt-get install ros-melodic-rosserial
+</code></pre>
+</li>
+</ul>
+<h1>Communication via serial port</h1>
+<ul>
+<li>
+<p>Run following in host computer:</p>
+<pre><code>rosrun rosserial_python serial_node.py /dev/ttyACM0
+</code></pre>
+</li>
+<li>
+<p>Replace the above port name with the target port you need.</p>
+</li>
+</ul>
+<h1>Communication via network socket</h1>
+<ul>
+<li>
+<p>Run following in host computer:</p>
+<pre><code>rosrun rosserial_python serial_node.py tcp
+</code></pre>
+</li>
+<li>
+<p>Output:</p>
+<pre><code>[INFO] [1589114115.055138]: ROS Serial Python Node
+Fork_server is:  False
+[INFO] [1589114115.076898]: Waiting for socket connections on port 11411
+waiting for socket connection
+</code></pre>
+</li>
+</ul>
+<p>https://github.com/agnunez/espros</p>
+</section></body>
+</html>

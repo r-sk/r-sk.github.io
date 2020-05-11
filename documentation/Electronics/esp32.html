@@ -18,9 +18,52 @@
 <a href="esp32.html">ESP 32</a>
 </div>
 <section class="vscode-light">
-<h1>Micropython - Before you begin</h1>
+<h1>ESP32 Features</h1>
+<h2>Pin Configuration</h2>
 <ul>
-<li>Download micropython firmware for esp32 from: <a href="https://micropython.org/download/esp32/">ESP32 frimware</a></li>
+<li>The board I have used was <strong>Adafruit HUZZAH32 - ESP32 Feather</strong>. Its pin configuration is shown below.</li>
+<li>Everything you need to know about this board: <a href="https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview">Adafruit HUZZAH32 - ESP32 Feather</a></li>
+</ul>
+<p><img src="images/esp32_feather.png" width="700"/></p>
+<ul>
+<li>Other <strong>nodeMCU</strong> boards will have slightly different configuration.</li>
+<li>In Feather, <strong>PIN13</strong> is connected to <strong>onboard LED</strong></li>
+</ul>
+<h2>Power Management</h2>
+<ul>
+<li>To do list</li>
+<li>In feather, we can just connect a battery which will run only when no power and even charges the battery with 200mA when power is available. How cool is that !!!</li>
+</ul>
+<h2>Multi-threading</h2>
+<ul>
+<li>To-Do list</li>
+</ul>
+<h1>ESP32 Platforms</h1>
+<ul>
+<li>ESP32 can be used with various platforms such as:</li>
+<li>Arduino IDE</li>
+<li>micropython</li>
+<li>ESP-IDF (IOT Development Framework)</li>
+<li>MQTT</li>
+</ul>
+<h1>ESP32 using Arduino IDE</h1>
+<h2>Arduino IDE Preparations</h2>
+<ul>
+<li>
+<p>Add following URL in File -&gt; Preferences -&gt; Additional Board Manager URLs</p>
+<pre><code>https://dl.espressif.com/dl/package_esp32_index.json
+</code></pre>
+</li>
+<li>
+<p>From Tools -&gt; Board -&gt; Board Manager... , search and install ESP32</p>
+</li>
+<li>Thats it, you are ready to upload the code</li>
+</ul>
+<h1>ESP32 using Micropython</h1>
+<h2>Preparation</h2>
+<ul>
+<li>Forst, you need to install micropython frimware to esp32</li>
+<li>Download the firmware for esp32 from: <a href="https://micropython.org/download/esp32/">ESP32 frimware</a></li>
 </ul>
 <h2>ESPTool</h2>
 <ul>
@@ -47,8 +90,8 @@
 </code></pre>
 </li>
 </ul>
-<h1>Common tools for programming and REPL</h1>
-<h2>Ampy</h2>
+<h2>Common tools for programming and REPL</h2>
+<h3>Ampy</h3>
 <ul>
 <li>No REPL</li>
 <li>For file transfer</li>
@@ -64,17 +107,17 @@ This makes this thing useful in developing phase</p>
 <li>Other serial communication softwares like Putty can be used for serial REPL</li>
 <li>But, cannot use ampy while port is busy with serial REPL</li>
 </ul>
-<h2>ESPlorer</h2>
+<h3>ESPlorer</h3>
 <ul>
 <li>ToDo</li>
 </ul>
-<h2>Putty</h2>
+<h3>Putty</h3>
 <ul>
 <li>For REPL</li>
 <li>For serial Communication</li>
 </ul>
-<h2>Picocom</h2>
-<h2>Rshell</h2>
+<h3>Picocom</h3>
+<h3>Rshell</h3>
 <ul>
 <li>Both REPL and file transfer</li>
 </ul>
@@ -86,26 +129,6 @@ This makes this thing useful in developing phase</p>
 <li>As soon as esp32 restarts, it runs boot.py, then main.py and if it gets stuck in while(1) loop, we cannot access to web REPL</li>
 <li>To avoid this, keep delay, enough to log in just after webrepl.start()</li>
 <li>And connect the web REPL within this time</li>
-</ul>
-<h1>Pin Configuration</h1>
-<ul>
-<li>The board I have used was <strong>Adafruit HUZZAH32 - ESP32 Feather</strong>. Its pin configuration is shown below.</li>
-<li>Everything you need to know about this board: <a href="https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview">Adafruit HUZZAH32 - ESP32 Feather</a></li>
-</ul>
-<p><img src="images/esp32_feather.png" width="700"/></p>
-<ul>
-<li>Other <strong>nodeMCU</strong> boards will have slightly different configuration.</li>
-<li>In Feather, PIN13 is connected to onboard LED</li>
-</ul>
-<h1>Power Management</h1>
-<ul>
-<li>To do list</li>
-<li>In feather, we can just connect a battery which will run only when no power and even charges the battery with 200mA when power is available</li>
-<li>How cool is that !!!</li>
-</ul>
-<h1>Multi-threading</h1>
-<ul>
-<li>To-Do list</li>
 </ul>
 <h1>Error debugging</h1>
 <ul>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="tf.html">Tf</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="gazebo_plugins.html">Gazebo Plugins</a>
+<a href="ros_navigation_stack.html">ROS Navigation Stack</a>
+<a href="image_pipeline.html">Image Pipeline</a>
+<a href="viso2_ros.html">VISO2 ROS</a>
+<a href="arduino_ros.html">Arduino ROS</a>
+<a href="uncategorized.html">Uncategorized</a>
+</div>
+<section class="vscode-light">
+<h1>Installation</h1>
+<ul>
+<li>See: <a href="http://wiki.ros.org/rosserial_arduino">rosserial_arduino</a></li>
+<li>Tutorial in : <a href="http://wiki.ros.org/rosserial_arduino/Tutorials">rosserial arfuino Tutorials</a></li>
+<li>Two main steps:<ol>
+<li>Install rosserial in computer</li>
+<li>Add roslib library for Arduino</li>
+</ol>
+</li>
+</ul>
+<h2>Install 'rossserial'</h2>
+<pre><code>sudo apt-get install ros-melodic-rosserial-arduino
+sudo apt-get install ros-melodic-rosserial
+</code></pre>
+<h2>Add 'ros_lib' library to Arduino IDE</h2>
+<ul>
+<li>
+<p>First go to Libraries folder of Arduino. For me, it was:</p>
+<pre><code>~/snap/arduino/7/Arduino/libraries
+</code></pre>
+</li>
+<li>
+<p>Remove any existing <strong>ros_lib</strong> library</p>
+<pre><code>rm -rf ros_lib
+</code></pre>
+</li>
+<li>
+<p>Install <strong>ros_lib</strong> library</p>
+<pre><code>rosrun rosserial_arduino make_libraries.py .
+</code></pre>
+</li>
+</ul>
+<h1>Examples</h1>
+<h2>Publish 'Hello World' by Arduino</h2>
+<ul>
+<li><a href="http://wiki.ros.org/rosserial_arduino/Tutorials/Hello%20World">Tutorial</a></li>
+</ul>
+<p>Follow steps:</p>
+<ol>
+<li>Upload Example Hello World sketch (of ros_lib) to arduino</li>
+<li>roscore</li>
+<li>
+<p>Run rosserial</p>
+<pre><code>rosrun rosserial_python serial_node.py /dev/ttyACM0
+</code></pre>
+</li>
+<li>
+<p>That was all.</p>
+</li>
+<li>Now you can see new node named <strong>/serial_node</strong></li>
+<li>And new topic <strong>/chatter</strong></li>
+<li>Echo the chatter topic to see the message 'Hello World'</li>
+<li>The codes of Arduino for ros is similar to ROS code C++ version.</li>
+<li>So, better to learn C++ version of ROS codes to understand arduino easily.</li>
+</ol>
+</section></body>
+</html>

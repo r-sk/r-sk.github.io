@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="../../css/documentation.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/highlight.css" rel="stylesheet" type="text/css"/>
+<link href="../../highlight/styles/default.css" rel="stylesheet"/>
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sidebar">
+<a href="../../index.html">
+<img src="images/robot_icon.png"/>
+</a>
+<a href="index.html">Introduction</a>
+<a href="tf.html">Tf</a>
+<a href="gazebo.html">Gazebo</a>
+<a href="gazebo_plugins.html">Gazebo Plugins</a>
+<a href="ros_navigation_stack.html">ROS Navigation Stack</a>
+<a href="image_pipeline.html">Image Pipeline</a>
+<a href="viso2_ros.html">VISO2 ROS</a>
+<a href="arduino_ros.html">Arduino ROS</a>
+<a href="uncategorized.html">Uncategorized</a>
+</div>
+<section class="vscode-light">
+<h1>Node Vs Nodelet</h1>
+<ul>
+<li>Regular nodes share data by passing messages over TCP.</li>
+<li>Nodelets share data by sharing a pointer to a block of memory.</li>
+<li>So, for a regular node, you've got to collect all the data, pack it into a ROS form, and then write the entire data packet, and then the receiver has to read the thing and unpack it.</li>
+<li>Nodelets only work where there is memory to be shared <strong>(i.e., the same physical machine)</strong>, so you can't use them for networked devices.</li>
+<li>You could have something like a laser scanner, which produces a breathtaking amount of data, connected via nodelet to a process that extracts something of meaning from that data. The extraction process could then be connected via a regular node to some networked device and pass only the important results from the scan data analysis.</li>
+</ul>
+<p margin-left="1000">
+<img align-"right"="" src="images/node_vs_nodelet.png"/>
+</p>
+<h1>Inline topic remapping</h1>
+<pre><code>rosbag play --clock sev_2017-02-20-15-20-50.bag /stereo/left/image_raw/compressed:=/stereo_camera/left/image_raw_throttle/compressed stereo/right/image_raw/compressed:=/stereo_camera/right/image_raw_throttle/compressed /stereo/left/camera_info:=/stereo_camera/leftcamera_info_throttle /stereo/right/camera_info:=/stereo_camera/right/camera_info_throttle
+</code></pre>
+</section></body>
+</html>

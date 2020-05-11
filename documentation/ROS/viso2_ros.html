@@ -21,6 +21,8 @@
 <a href="ros_navigation_stack.html">ROS Navigation Stack</a>
 <a href="image_pipeline.html">Image Pipeline</a>
 <a href="viso2_ros.html">VISO2 ROS</a>
+<a href="arduino_ros.html">Arduino ROS</a>
+<a href="uncategorized.html">Uncategorized</a>
 </div>
 <section class="vscode-light">
 <h1>'viso2_ros' package</h1>
@@ -35,25 +37,51 @@
 </li>
 <li>To estimate the scale of the motion, the mono odometer uses the ground plane and therefore needs information about the camera's z-coordinate and its pitch.</li>
 <li>Stereo odometer just needs stereo images.</li>
+<li>For this to work, it needs to know:<br/>
+        base_link → camera</li>
+<li>If not published, it assumes it as the identity matrix which means the robot frame and the camera frame are identical</li>
+</ul>
+<h1>Tf setup</h1>
+<ul>
 <li>Tf tree structure needed:<br/>
         world → odom → base_link → camera</li>
 </ul>
 <blockquote>
 <p>Well Looks like VISO2 don't use base_footprint as its root link<br/>
-VISO2 is preety old and back then, base_link was used as root link<br/>
-So just omit base_footprint link in the URDF file</p>
+VISO2 is preety old and back then, base_link was used as root link  </p>
 </blockquote>
 <ul>
-<li>This package publishes:<br/>
-        odom → base_link</li>
-<li>For this to work, it needs to know:<br/>
-        base_link → camera</li>
-<li>If not published, it assumes it as the identity matrix which means the robot frame and the camera frame are identical</li>
+<li>
+<p>To change this to base_footprint:</p>
+<p><param name="base_link_frame_id" type="string" value="/base_footprint"/></p>
+</li>
+<li>
+<p>This package publishes:<br/>
+        odom → base_link</p>
+</li>
 </ul>
-<blockquote>
-<p>The coordinate frame of the camera is expected to be the optical frame (like in monitor).<br/>
-i.e x is pointing right, y downwards and z from the camera into the scene.</p>
-</blockquote>
+<h2>'publish_tf' param</h2>
+<ul>
+<li>Consider root_link is default i.e base_link.</li>
+</ul>
+<h3>If set to 1</h3>
+<pre><code>&lt;param name="publish_tf"  type="bool" value="1"/&gt; (1 by default)
+</code></pre>
+<ul>
+<li>odom → base_link is published and overwrite any other odom → base_link transformations.</li>
+<li>So, robot will be attached to viso2 odometry but base_footprint will move as per cmd_vel</li>
+<li>In picture below: RED = Wheel Odom, Blue = VISO2 Odom</li>
+</ul>
+<p><img src="images/viso2_publish_tf.png" width="900"/>
+<img src="images/viso2_publish_tf_frames.png" width="900"/></p>
+<h3>If set to 0</h3>
+<pre><code>&lt;param name="publish_tf"  type="bool" value="0"/&gt;
+</code></pre>
+<ul>
+<li>odom → base_link is not published</li>
+</ul>
+<p><img src="images/viso2_dont_publish_tf.png" width="900"/>
+<img height="350" src="images/viso2_dont_publish_tf_frames.png"/></p>
 <h1>Extras</h1>
 <ul>
 <li>Uses <strong>dense</strong> stereo point clouds coming from stereo_image_proc</li>
